@@ -1,0 +1,415 @@
+$engine: 3
+$onesync: on
+name: RSG Framework v2 (pinned 2.x)
+version: 1.0.0
+author: Rexshack Gaming
+description: RSG RedM Server Build - last 2.x state before the v3 move, every resource pinned to a commit
+
+tasks:
+  #  Download Base Files
+  - action: download_github
+    src: https://github.com/duckie210/rsg-framework-v2-recipe
+    ref: main
+    dest: ./tmp/RSGCore
+
+  - action: move_path
+    src: ./tmp/RSGCore/server.cfg
+    dest: ./server.cfg
+
+  - action: move_path
+    src: ./tmp/RSGCore/myLogo.png
+    dest: ./myLogo.png
+
+  # Prepare Database
+  - action: connect_database
+  - action: query_database
+    file: ./tmp/RSGCore/rsgcore.sql
+
+  # Downloading Standalone Resources  
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    ref: c6afa3909c763e3327ed76825e78453286c99f05
+    subpath: resources
+    dest: ./resources/[cfx-default]
+
+  - action: download_file
+    path: ./tmp/files/oxmysql.zip
+    url: https://github.com/CommunityOx/oxmysql/releases/download/v2.12.3/oxmysql.zip
+  - action: unzip
+    dest: ./resources/[standalone]
+    src: ./tmp/files/oxmysql.zip
+    
+  - action: download_github
+    dest: ./resources/[standalone]/ox_lib
+    ref: 5391d323c7e83e4291d7d7035da19f71020547e1
+    src: https://github.com/Rexshack-RedM/ox_lib
+
+  - action: download_github
+    dest: ./resources/[standalone]/progressbar
+    ref: 3a6ae3bbcb76c2a146e3b8d7fb8e37edcdafc9b4
+    src: https://github.com/Rexshack-RedM/progressbar
+
+  - action: download_github
+    dest: ./resources/[standalone]/PolyZone
+    ref: 9dab54d930639f69beacae746106d1d8255ef0f5
+    src: https://github.com/Rexshack-RedM/PolyZone
+
+  - action: download_github
+    dest: ./resources/[standalone]/pma-voice
+    ref: 6c9d96ed7a02e30912f1a0ce92629bf9afbbca8c
+    src: https://github.com/AvarianKnight/pma-voice
+
+  - action: download_github
+    dest: ./resources/[standalone]/weathersync
+    ref: d4e8867537126a7c468311aff1e57f892ce46c2d
+    src: https://github.com/RexShack/weathersync
+
+  - action: download_github
+    dest: ./resources/[standalone]/xsound
+    ref: 7b345f8b409ccc165efec1f55123bf56106d37ac
+    src: https://github.com/Xogy/xsound
+
+  - action: download_github
+    dest: ./resources/[standalone]/interact-sound 
+    ref: 1e08586ade03ae405206eedf7a00bd95d4a73a32
+    src: https://github.com/Rexshack-RedM/interact-sound 
+
+  - action: download_github
+    dest: ./resources/[standalone]/menu_base
+    ref: 1660eda4748dc99b850a04df832f65787818adc5
+    src: https://github.com/Rexshack-RedM/menu_base
+
+  - action: download_github
+    dest: ./resources/[standalone]/rNotify
+    ref: c01531d2cf9999a7620f7b07ee79d2607ad43b11
+    src: https://github.com/Rexshack-RedM/rNotify
+
+  - action: download_github
+    dest: ./resources/[standalone]/ox_target
+    ref: a03249329d314fc4e4dea56a206884531fb8ff96
+    src: https://github.com/Rexshack-RedM/ox_target
+
+  - action: download_github
+    dest: ./resources/[standalone]/ox_doorlock
+    ref: 60e1e24225d9469490a3ba9163a316553636a380
+    src: https://github.com/Rexshack-RedM/ox_doorlock
+    
+  - action: download_github
+    dest: ./resources/[standalone]/redm-female-fix
+    ref: 1cff9742a7130154c242b232f18ec7c0fd5b821b
+    src: https://github.com/Popisek/redm-female-fix
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # Download RSGCore resources
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-core
+    ref: 18a6987802045ea881bc734482266f9215c51111
+    dest: ./resources/[framework]/rsg-core
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-inventory
+    ref: 6e1019d72e5548a8e97f53340a7ddbb298761201
+    dest: ./resources/[framework]/rsg-inventory
+
+  - action: download_github
+    src: https://github.com/RexShack/rsg-multicharacter
+    ref: d8a95559bf7d919a5188c22e83d9b765c2f2a60d
+    dest: ./resources/[framework]/rsg-multicharacter
+
+  - action: download_github
+    src: https://github.com/RexShack/rsg-appearance
+    ref: b661402422ee37a61a51f3bd7088955b86ece88c
+    dest: ./resources/[framework]/rsg-appearance
+
+  - action: download_github
+    src: https://github.com/RexShack/rsg-spawn
+    ref: 6615dfca7a1d10719468905f6fa649860440fb5d
+    dest: ./resources/[framework]/rsg-spawn
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-wardrobe
+    ref: 1be95a1bef443b193e9d4cd7110806fc47061197
+    dest: ./resources/[framework]/rsg-wardrobe
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-medic
+    ref: 387d5c3dd6fbb6e095baab9077ac8acce647786c
+    dest: ./resources/[framework]/rsg-medic
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-lawman
+    ref: 8c4e46dad8b5418e2714ba5326f33ff48ad3cff5
+    dest: ./resources/[framework]/rsg-lawman
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-prison
+    ref: 70e9db0b7a2cd801033cf0ee175efd2980e16322
+    dest: ./resources/[framework]/rsg-prison
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-doorlock
+    ref: fcdd9a3d5f8415d484f7f641bb42a287d3168c64
+    dest: ./resources/[framework]/rsg-doorlock
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-banking
+    ref: 65f2a7b6d9ad751c6cc5ee66213d8e55de8d80d7
+    dest: ./resources/[framework]/rsg-banking
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-weapons
+    ref: f461b8770ebbd49712adfa76ea5abc5ecb0c92a7
+    dest: ./resources/[framework]/rsg-weapons
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-ammo
+    ref: c8e0eff1973d89237cc509e7da62a7dcf0403925
+    dest: ./resources/[framework]/rsg-ammo
+
+  - action: download_github
+    src: https://github.com/RexShack/rsg-shops
+    ref: b79c57c86533332c98c5f7d4711aa9f77bd0002b
+    dest: ./resources/[framework]/rsg-shops
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-radialmenu
+    ref: 5c6f907148a0110a266dd6def11e747acfee5d0d
+    dest: ./resources/[framework]/rsg-radialmenu
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-essentials
+    ref: 34777cc2e8f9f3cf3e3a829e94dcb8348703ab47
+    dest: ./resources/[framework]/rsg-essentials
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-telegram
+    ref: c01d5fc3302ea921537982867df820efe203484a
+    dest: ./resources/[framework]/rsg-telegram
+
+  - action: download_github
+    src: https://github.com/RexShack/rsg-horses
+    ref: 9f4885a472592042b3b11bdb2372ec5efb3635d2
+    dest: ./resources/[framework]/rsg-horses
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/rsg-hud
+    ref: 7bcf5afd5568c5529c90ca91a3a94b4181dc40df
+    dest: ./resources/[framework]/rsg-hud
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-menubase
+    ref: 671a4dc0a00d67ca9855395b475189edc60037a0
+    src: https://github.com/Rexshack-RedM/rsg-menubase
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-playerinfo
+    ref: 4f55175746871766947ce4c6ee274b3ebaae8736
+    src: https://github.com/Rexshack-RedM/rsg-playerinfo
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-bossmenu
+    ref: 60f773f306c334b47c49b0264daff7278721fa35
+    src: https://github.com/Rexshack-RedM/rsg-bossmenu
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-gangmenu
+    ref: e6446e5cce5b013dbcd4ebf25ea9497250a130aa
+    src: https://github.com/Rexshack-RedM/rsg-gangmenu
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-npcs
+    ref: 9d820c5038706c4e4900cf201e6dabf437e9939d
+    src: https://github.com/Rexshack-RedM/rsg-npcs
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-canteen
+    ref: 36b63172f7a44bb90dc432c0c2a38d91564878e3
+    src: https://github.com/Rexshack-RedM/rsg-canteen
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-barbers
+    ref: 4a2a779c882a529e9cd1e1333aba8e0f43fc08b1
+    src: https://github.com/Rexshack-RedM/rsg-barbers
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-bathing
+    ref: f11101b4fc2de0d1e39432140d89b9ddb2b1b373
+    src: https://github.com/Rexshack-RedM/rsg-bathing
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-lockpick
+    ref: 6fc089314c48ec4e94fec1ea46a1247860c61eb6
+    src: https://github.com/Rexshack-RedM/rsg-lockpick
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-adminmenu
+    ref: 7641734aceeda53ade10554108b30291f815ab20
+    src: https://github.com/Rexshack-RedM/rsg-adminmenu
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-animations
+    ref: 4f32eb5b91c66f50ee897426116ecf12f964911a
+    src: https://github.com/Rexshack-RedM/rsg-animations
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-multijob
+    ref: d564029c691aa67e26e2a4d7ca8ec3e98a8b3196
+    src: https://github.com/Rexshack-RedM/rsg-multijob
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-consume
+    ref: 9999c45ee5efbd9ee30e4fef6c46497b32feed56
+    src: https://github.com/Rexshack-RedM/rsg-consume
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-fishing
+    ref: 2134bd943f1252d0fb518e21bd734bde19efb6c8
+    src: https://github.com/Rexshack-RedM/rsg-fishing
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-weaponcomp
+    ref: 9d4541ba7eec30cf94a6fa19b0e365fb685eb280
+    src: https://github.com/Rexshack-RedM/rsg-weaponcomp
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-loading
+    ref: a25891e8205f0a61ea3acefda2994a6cd26ac755
+    src: https://github.com/Rexshack-RedM/rsg-loading
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-mdt
+    ref: a63d3e8cb2863cc553cfd77a9e84606284997c9a
+    src: https://github.com/Rexshack-RedM/rsg-mdt
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-hunting
+    ref: afb660ce8d03c00e90c0323cf860e2a40834a238
+    src: https://github.com/Rexshack-RedM/rsg-hunting
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-herbalist
+    ref: ca464d95cf1c70d770ea4cecc888c856d4a4c01f
+    src: https://github.com/Rexshack-RedM/rsg-herbalist
+    
+  - action: download_github
+    dest: ./resources/[standalone]/chat-redm
+    ref: f05a27d2c909c1854988d1d6cdd2afb6925cbc43
+    src: https://github.com/RexShack/chat-redm
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-hotair
+    ref: 2f0e5a249c3c10ad15c311365dc9c51b6d5e762d
+    src: https://github.com/Rexshack-RedM/rsg-hotair
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-samples
+    ref: aa97f17709728fb98fc03d344fee28512c56917a
+    src: https://github.com/Rexshack-RedM/rsg-samples
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-track
+    ref: 4dc2142df838a91100fb9042c8c91860262c0c3f
+    src: https://github.com/Rexshack-RedM/rsg-track
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-goldclaim
+    ref: a4bde7174994a6bab74cc554c2c4aa76fada44fa
+    src: https://github.com/Rexshack-RedM/rsg-goldclaim
+    
+  - action: waste_time # prevent github throttling
+    seconds: 10
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-wagons
+    ref: 3eeca3d673880719fcd0946e058b0a6cdabd67c3
+    src: https://github.com/Rexshack-RedM/rsg-wagons
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-railroad
+    ref: c612dc2b2afc302fd906131f404d14b472269afa
+    src: https://github.com/Rexshack-RedM/rsg-railroad
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-huntingpets
+    ref: 118190c457d73ae3401ae9a1431c35f85c9d1d4f
+    src: https://github.com/Rexshack-RedM/rsg-huntingpets
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-trapdoors
+    ref: afe49dbab4ad4509d4174dc5f26355071fb81f2b
+    src: https://github.com/Rexshack-RedM/rsg-trapdoors
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-fishmonger
+    ref: 6f55d7955aa26e9db83cc545f72437ec5ac014a6
+    src: https://github.com/Rexshack-RedM/rsg-fishmonger
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-looting
+    ref: be25d38b4c78dcb737c7569896421839337920cc
+    src: https://github.com/Rexshack-RedM/rsg-looting
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-lumberjack
+    ref: 4ef0f0438f64b2472be3c15a7c796980e06e1135
+    src: https://github.com/Rexshack-RedM/rsg-lumberjack
+    
+  - action: download_github
+    dest: ./resources/[framework]/rsg-discord
+    ref: 4e5d21188bff156e91300c3942740f110e93becd
+    src: https://github.com/Rexshack-RedM/rsg-discord
+
+  - action: download_github
+    dest: ./resources/[framework]/rsg-robbery
+    ref: 5b85d17e83eef9b6bd9e7f1048b51befcad80a60
+    src: https://github.com/Rexshack-RedM/rsg-robbery
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # Community Shares
+  
+  - action: download_github
+    dest: ./resources/[community]/Nt_Blackjack
+    ref: 501711360a63a5758c51e26ba2c7fd61445bc04a
+    src: https://github.com/Nubetastic/Nt_Blackjack
+    
+  - action: download_github
+    dest: ./resources/[community]/Nt_Holdem
+    ref: f2578b1d8f53f4e5738cf1dd462fb1d138289c19
+    src: https://github.com/Nubetastic/Nt_Holdem
+
+  # Download Rexshack MapMod resources
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/redm-ipls
+    ref: e48f3c8e847ab8f6fe0c7488f234c38773268da2
+    dest: ./resources/[mapmods]/redm-ipls
+
+  - action: download_github
+    src: https://github.com/Rexshack-RedM/redm-ymaps
+    ref: 278805bb7b75b7e5836df0b49695dfa02391a8ed
+    dest: ./resources/[mapmods]/redm-ymaps
+
+  # Remove Old Chat
+  - action: remove_path
+    path: ./resources/[cfx-default]/[gameplay]/chat
+
+  # Clean up
+  - action: remove_path
+    path: ./tmp
