@@ -18,7 +18,8 @@ https://raw.githubusercontent.com/duckie210/rsg-framework-v2-recipe/main/rsgcore
 
 ## Changes from the official 2026-10-02 recipe
 
-- Every `download_github` task pinned to a commit (`ref: <sha>`); oxmysql pinned to release v2.12.3.
+- Every `download_github` task pinned to a commit (`ref: <sha>`); oxmysql switched from the CommunityOx fork to the official
+  [overextended/oxmysql](https://github.com/overextended/oxmysql) release v2.14.1 (needs an FXServer build with Node 22 support).
 - v3 resources swapped back for the 2.x resources they replaced (now archived under `RexShack/`):
   - `rsg-character` -> `rsg-multicharacter`, `rsg-appearance`, `rsg-spawn`
   - `rsg-stores` -> `rsg-shops`

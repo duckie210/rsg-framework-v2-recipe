@@ -72,7 +72,7 @@
 | Nt_Holdem | external/moved | f2578b1 | - | Nubetastic/Nt_Holdem: state before cutoff; repo has a newer commit on 2026-10-05 |
 | redm-ipls | no 2.x; state before cutoff | e48f3c8 (2025-12-24) | 1.0.2 | unchanged since |
 | redm-ymaps | no 2.x; state before cutoff | 278805b (2023-03-03) | - | unchanged since |
-| oxmysql | external release | v2.12.3 | - | latest release (repo archived 2026-02-20) |
+| oxmysql | external release | overextended v2.14.1 | - | official repo; last release before the v3 cutover (2026-05-04) |
 
 Excluded from pinned recipe: **rsg-backpacks** - v3-only resource (repo created 2026-09-30, added to recipe 2026-10-01).
 
